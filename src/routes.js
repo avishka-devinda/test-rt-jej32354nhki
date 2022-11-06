@@ -9,8 +9,6 @@ import Login from './pages/Login';
 import NotFound from './pages/Page404';
 import Register from './pages/Register';
 import Products from './pages/Products';
-import Test from './pages/test';
-
 import DashboardApp from './pages/DashboardApp';
 
 // ----------------------------------------------------------------------
@@ -30,10 +28,6 @@ export default function Router() {
     {
       path: 'login',
       element: <Login />,
-    },
-       {
-      path: 'test',
-      element: <Test />,
     },
     {
       path: 'register',
