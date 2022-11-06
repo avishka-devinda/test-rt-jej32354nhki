@@ -47,7 +47,7 @@ export default function RegisterForm() {
   };
   
     const onSubmit = async (data) => {
- console.log(data)
+ console.log('data',data)
   };
 
   return (
