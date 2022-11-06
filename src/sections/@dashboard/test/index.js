@@ -15,7 +15,6 @@ import { FormProvider, RHFTextField, RHFCheckbox } from '../../../components/hoo
 // ----------------------------------------------------------------------
 const IncrementerStyle = styled('div')(({ theme }) => ({
   display: 'flex',
-  width:'6rem',
   alignItems: 'center',
   justifyContent: 'space-between',
   marginBottom: theme.spacing(0.5),
@@ -42,6 +41,8 @@ export default function LoginForm() {
 
   return (
 
+      <Grid container spacing={3}>
+        <Grid item xs={4} md={4}>
           <IncrementerStyle>
             <IconButton size="small" color="inherit" onClick={handleDecreaseQuantity}  disabled={quantity <= 1}>
               <Iconify icon={'eva:minus-fill'} width={16} height={16} />
@@ -51,5 +52,7 @@ export default function LoginForm() {
               <Iconify icon={'eva:plus-fill'} width={16} height={16} />
             </IconButton>
           </IncrementerStyle>
+        </Grid>
+      </Grid>
   );
 }
