@@ -11,6 +11,7 @@ import { styled } from '@mui/material/styles';
 // components
 import Iconify from '../../../components/Iconify';
 import { FormProvider, RHFTextField, RHFCheckbox } from '../../../components/hook-form';
+import PaymentModal from './PaymentModal';
 
 // ----------------------------------------------------------------------
 const IncrementerStyle = styled('div')(({ theme }) => ({
@@ -41,6 +42,12 @@ export default function LoginForm() {
 
 
   return (
+    <>
+      <PaymentModal
+	orderId={45896588}
+	name="galaxy test"
+	amount="3500"
+      />
 
           <IncrementerStyle>
             <IconButton size="small" color="inherit" onClick={handleDecreaseQuantity}  disabled={quantity <= 1}>
@@ -51,5 +58,6 @@ export default function LoginForm() {
               <Iconify icon={'eva:plus-fill'} width={16} height={16} />
             </IconButton>
           </IncrementerStyle>
+          </>
   );
 }
