@@ -31,15 +31,14 @@ export default function LoginForm() {
   const [available, setAvailable] = useState(10);
 
   const handleIncreaseQuantity = (productId) => {
-    console.log(quantity => quantity + 1);
-   // setQuantity(quantity);
-    setQuantity(quantity => quantity + 1)
-  };
-  
-   const handleDecreaseQuantity = (productId) => {
-       setQuantity(quantity => quantity - 1)
+    console.log((quantity) => quantity + 1);
+    // setQuantity(quantity);
+    setQuantity((quantity) => quantity + 1);
   };
 
+  const handleDecreaseQuantity = (productId) => {
+    setQuantity((quantity) => quantity - 1);
+  };
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
@@ -101,7 +100,7 @@ export default function LoginForm() {
       <Grid container spacing={3}>
         <Grid item xs={4} md={4}>
           <IncrementerStyle>
-            <IconButton size="small" color="inherit" onClick={handleDecreaseQuantity}  disabled={quantity <= 1}>
+            <IconButton size="small" color="inherit" onClick={handleDecreaseQuantity} disabled={quantity <= 1}>
               <Iconify icon={'eva:minus-fill'} width={16} height={16} />
             </IconButton>
             {quantity}

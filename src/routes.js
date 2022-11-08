@@ -10,6 +10,8 @@ import NotFound from './pages/Page404';
 import Register from './pages/Register';
 import Products from './pages/Products';
 import Test from './pages/test';
+import OrderDetails from './pages/OrderDetails';
+
 
 import DashboardApp from './pages/DashboardApp';
 
@@ -42,6 +44,10 @@ export default function Router() {
     {
       path: 'payment/:id',
       element: <Register />,
+    },
+    {
+      path: 'order/:id',
+      element: <OrderDetails />,
     },
     {
       path: '/',

@@ -42,9 +42,8 @@ export default function RegisterForm() {
     formState: { isSubmitting },
   } = methods;
 
-
-    const onSubmit = async (data) => {
- console.log('data :',data)
+  const onSubmit = async (data) => {
+    console.log('data :', data);
   };
 
   return (

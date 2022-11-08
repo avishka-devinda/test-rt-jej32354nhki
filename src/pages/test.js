@@ -9,12 +9,9 @@ import TestCard from '../sections/@dashboard/test';
 // ----------------------------------------------------------------------
 
 export default function Test() {
-
-
-
   return (
     <Page title="Dashboard: Products">
-    <TestCard/>
+      <TestCard />
     </Page>
   );
 }

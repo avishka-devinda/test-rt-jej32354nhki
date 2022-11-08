@@ -1,7 +1,10 @@
-import { Link as RouterLink } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+
+import { Link as RouterLink, useParams } from 'react-router-dom';
+import axios from 'axios';
 // @mui
 import { styled } from '@mui/material/styles';
-import { Card, Link, Container, Typography } from '@mui/material';
+import { Card, Box, Link, Button, Container, Typography } from '@mui/material';
 // hooks
 import useResponsive from '../hooks/useResponsive';
 // components
@@ -58,45 +61,135 @@ const ContentStyle = styled('div')(({ theme }) => ({
 
 export default function Register() {
   const smUp = useResponsive('up', 'sm');
-
   const mdUp = useResponsive('up', 'md');
+  const params = useParams();
+
+  const [payment, setPayment] = useState({
+    _id: '',
+    order_id: '',
+    payment_id: '',
+    payhere_amount: '',
+    payhere_currency: '',
+    payment_status: '',
+    status_code: '',
+    createdAt: '',
+  });
+
+  useEffect(() => {
+    async function fetchData() {
+      axios.get(`https://avishkadevinda.up.railway.app/api/v1/payment/order_id/${params.id}`).then((res) => {
+        console.log(res.data);
+        const { _id, order_id, payment_status, payment_id, payhere_amount, payhere_currency, status_code, createdAt } =
+          res.data;
+
+        setPayment({
+          _id,
+          order_id,
+          payment_id,
+          payhere_amount,
+          payhere_currency,
+          payment_status,
+          status_code,
+          createdAt,
+        });
+      });
+    }
+    fetchData();
+  }, []);
 
   return (
     <Page title="Register">
       <RootStyle>
         <HeaderStyle>
           <Logo />
-          {smUp && (
-            <Typography variant="body2" sx={{ mt: { md: -2 } }}>
-              Already have an account? {''}
-              <Link variant="subtitle2" component={RouterLink} to="/login">
-                Login
-              </Link>
-            </Typography>
-          )}
         </HeaderStyle>
-
-        {mdUp && (
-          <SectionStyle>
-            <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
-              Manage the job more effectively with Minimal
-            </Typography>
-            <img alt="register" src="/static/illustrations/illustration_register.png" />
-          </SectionStyle>
-        )}
 
         <Container>
           <ContentStyle>
-           {/* <Typography variant="h4" gutterBottom>
-              Get started absolutely free.
-            </Typography>
-
-            <Typography sx={{ color: 'text.secondary', mb: 5 }}>Free forever. No credit card needed.</Typography>
-
-         <AuthSocial /> 
-
-      <RegisterForm /> */}
-            <Typography sx={{ color: '#2065D1', mb: 5, textAlign:'center' }}>payment successfully</Typography>
+            {payment.payment_status === 'successfull' && (
+              <Card sx={{ padding: '20px', marginBottom: '20px', background: '#54D62C' }}>
+                <Typography variant="subtitle1" sx={{ color: '#fff' }}>
+                  Payment Successfull
+                </Typography>
+              </Card>
+            )}
+            {payment.payment_status === 'error' && (
+              <Card sx={{ padding: '20px', marginBottom: '20px', background: '#FF4842' }}>
+                <Typography variant="subtitle1" sx={{ color: '#fff' }}>
+                  Payment Failed
+                </Typography>
+              </Card>
+            )}
+            <Card sx={{ padding: '20px' }}>
+              <Typography variant="subtitle1">Payment Detail</Typography>
+              <Box sx={{ padding: '5px', typography: 'body1' }}>
+                <Box
+                  sx={{
+                    padding: '5px',
+                    display: 'flex',
+                    alignContent: 'center',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Box>Payment</Box>
+                  <Box>
+                    {payment.payhere_amount} {payment.payhere_currency}
+                  </Box>
+                </Box>
+                <Box
+                  sx={{
+                    padding: '5px',
+                    display: 'flex',
+                    alignContent: 'center',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Box>Payment ID</Box>
+                  <Box>{payment.payment_id}</Box>
+                </Box>
+                <Box
+                  sx={{
+                    padding: '5px',
+                    display: 'flex',
+                    alignContent: 'center',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Box>Order ID</Box>
+                  <Box>{payment.order_id}</Box>
+                </Box>
+                <Box
+                  sx={{
+                    padding: '5px',
+                    display: 'flex',
+                    alignContent: 'center',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Box>Payment Staus</Box>
+                  {true ? (
+                    <Box sx={{ color: '#229A16', fontWidget: '600' }}>{payment.payment_status}</Box>
+                  ) : (
+                    <Box sx={{ color: '#FF4842' }}>{payment.payment_status}</Box>
+                  )}
+                </Box>
+                <Button
+                  sx={{ marginTop: '10px'}}
+                  fullWidth
+                  size="large"
+                  type="submit"
+                  variant="contained"
+                component={RouterLink}
+                to={`/order/${payment.order_id}`}
+                >
+                  View Order
+                </Button>
+              </Box>
+            </Card>
 
             <Typography variant="body2" align="center" sx={{ color: 'text.secondary', mt: 3 }}>
               By registering, I agree to Minimal&nbsp;
@@ -110,14 +203,12 @@ export default function Register() {
               .
             </Typography>
 
-            {!smUp && (
-              <Typography variant="body2" sx={{ mt: 3, textAlign: 'center' }}>
-                Already have an account?{' '}
-                <Link variant="subtitle2" to="/login" component={RouterLink}>
-                  Login
-                </Link>
-              </Typography>
-            )}
+            <Typography variant="body2" sx={{ mt: 3, textAlign: 'center' }}>
+              Already have an account?{' '}
+              <Link variant="subtitle2" to="/login" component={RouterLink}>
+                Login
+              </Link>
+            </Typography>
           </ContentStyle>
         </Container>
       </RootStyle>

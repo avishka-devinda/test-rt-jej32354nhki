@@ -14,13 +14,10 @@ import Iconify from '../../../components/Iconify';
 import { FormProvider, RHFTextField, RHFCheckbox } from '../../../components/hook-form';
 import PaymentModal from './PaymentModal';
 
-
-
-
 // ----------------------------------------------------------------------
 const IncrementerStyle = styled('div')(({ theme }) => ({
   display: 'flex',
-  width:'6rem',
+  width: '6rem',
   alignItems: 'center',
   justifyContent: 'space-between',
   marginBottom: theme.spacing(0.5),
@@ -29,42 +26,33 @@ const IncrementerStyle = styled('div')(({ theme }) => ({
   border: `solid 1px ${theme.palette.grey[500_32]}`,
 }));
 
-
-
-
 export default function LoginForm() {
-
   const [quantity, setQuantity] = useState(1);
   const [available, setAvailable] = useState(10);
 
   const handleIncreaseQuantity = (productId) => {
-    console.log(quantity => quantity + 1);
-   // setQuantity(quantity);
-    setQuantity(quantity => quantity + 1)
-  };
-  
-   const handleDecreaseQuantity = (productId) => {
-       setQuantity(quantity => quantity - 1)
+    console.log((quantity) => quantity + 1);
+    // setQuantity(quantity);
+    setQuantity((quantity) => quantity + 1);
   };
 
+  const handleDecreaseQuantity = (productId) => {
+    setQuantity((quantity) => quantity - 1);
+  };
 
   return (
     <>
-      <PaymentModal
-	orderId={uuidv4()}
-	name="galaxy test"
-	amount="100"
-      />
+      <PaymentModal orderId={uuidv4()} name="galaxy test" amount="100" />
 
-          <IncrementerStyle>
-            <IconButton size="small" color="inherit" onClick={handleDecreaseQuantity}  disabled={quantity <= 1}>
-              <Iconify icon={'eva:minus-fill'} width={16} height={16} />
-            </IconButton>
-            {quantity}
-            <IconButton size="small" color="inherit" onClick={handleIncreaseQuantity} disabled={quantity >= available}>
-              <Iconify icon={'eva:plus-fill'} width={16} height={16} />
-            </IconButton>
-          </IncrementerStyle>
-          </>
+      <IncrementerStyle>
+        <IconButton size="small" color="inherit" onClick={handleDecreaseQuantity} disabled={quantity <= 1}>
+          <Iconify icon={'eva:minus-fill'} width={16} height={16} />
+        </IconButton>
+        {quantity}
+        <IconButton size="small" color="inherit" onClick={handleIncreaseQuantity} disabled={quantity >= available}>
+          <Iconify icon={'eva:plus-fill'} width={16} height={16} />
+        </IconButton>
+      </IncrementerStyle>
+    </>
   );
 }
