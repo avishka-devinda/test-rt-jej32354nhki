@@ -87,15 +87,16 @@ export default function Register() {
 
         <Container>
           <ContentStyle>
-            <Typography variant="h4" gutterBottom>
+           {/* <Typography variant="h4" gutterBottom>
               Get started absolutely free.
             </Typography>
 
             <Typography sx={{ color: 'text.secondary', mb: 5 }}>Free forever. No credit card needed.</Typography>
 
-            <AuthSocial />
+         <AuthSocial /> 
 
-            <RegisterForm />
+      <RegisterForm /> */}
+            <Typography sx={{ color: '#2065D1', mb: 5, textAlign:'center' }}>payment successfully</Typography>
 
             <Typography variant="body2" align="center" sx={{ color: 'text.secondary', mt: 3 }}>
               By registering, I agree to Minimal&nbsp;

@@ -9,9 +9,13 @@ import { Link, Stack, IconButton, InputAdornment, Grid } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { styled } from '@mui/material/styles';
 // components
+import { v4 as uuidv4 } from 'uuid';
 import Iconify from '../../../components/Iconify';
 import { FormProvider, RHFTextField, RHFCheckbox } from '../../../components/hook-form';
 import PaymentModal from './PaymentModal';
+
+
+
 
 // ----------------------------------------------------------------------
 const IncrementerStyle = styled('div')(({ theme }) => ({
@@ -24,6 +28,9 @@ const IncrementerStyle = styled('div')(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
   border: `solid 1px ${theme.palette.grey[500_32]}`,
 }));
+
+
+
 
 export default function LoginForm() {
 
@@ -44,9 +51,9 @@ export default function LoginForm() {
   return (
     <>
       <PaymentModal
-	orderId={45896588}
+	orderId={uuidv4()}
 	name="galaxy test"
-	amount="3500"
+	amount="100"
       />
 
           <IncrementerStyle>

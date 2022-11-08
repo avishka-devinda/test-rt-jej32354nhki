@@ -31,12 +31,16 @@ export default function Router() {
       path: 'login',
       element: <Login />,
     },
-       {
+    {
       path: 'test',
       element: <Test />,
     },
     {
       path: 'register',
+      element: <Register />,
+    },
+    {
+      path: 'payment/:id',
       element: <Register />,
     },
     {
